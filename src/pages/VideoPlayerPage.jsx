@@ -2,6 +2,10 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import sampleVideos from "../sampleData/videos.json";
+import { AiTwotoneLike } from "react-icons/ai";
+import { AiTwotoneDislike } from "react-icons/ai";
+
+
 
 const VideoPlayerPage = () => {
     const { videoId } = useParams();
@@ -82,107 +86,128 @@ const VideoPlayerPage = () => {
         );
 
     return (
-        <div style={styles.wrapper}>
-            <div style={styles.videoSection}>
-                {/* Replace with <video> tag when doing real uploads */}
-                <img src={video.thumbnailUrl} alt={video.title} style={styles.thumbnail} />
-                <div style={styles.details}>
-                    <h2>{video.title}</h2>
-                    <p>{video.description}</p>
-                    <p>
-                        <b>Channel:</b> <Link to={`/channel/${video.channelId}`}>{video.channelName}</Link>
+        <div className="max-w-5xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
+            <div className="flex flex-col md:flex-row gap-8">
+                {/* Video player or thumbnail */}
+                <img
+                    src={video.thumbnailUrl}
+                    alt={video.title}
+                    className="rounded-lg w-full md:w-96 h-auto object-cover"
+                />
+                <div className="flex-1">
+                    <h2 className="text-2xl font-bold mb-2">{video.title}</h2>
+                    <p className="mb-3 text-gray-700">{video.description}</p>
+                    <p className="mb-3">
+                        <b>Channel: </b>
+                        <Link
+                            to={`/channel/${video.channelId}`}
+                            className="text-red-600 hover:underline"
+                        >
+                            {video.channelName}
+                        </Link>
                     </p>
-                    <div style={styles.stats}>
+                    <div className="flex items-center gap-6 text-gray-600">
                         <span>{video.views.toLocaleString()} views</span>
-                        <button onClick={handleLike} style={styles.likeBtn}>
-                            👍 {likeState.likes}
+                        <button
+                            onClick={handleLike}
+                            className="flex items-center gap-1 px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 cursor-pointer"
+                        >
+                            <AiTwotoneLike />
+                            <span>{likeState.likes}</span>
                         </button>
-                        <button onClick={handleDislike} style={styles.dislikeBtn}>
-                            👎 {likeState.dislikes}
+                        <button
+                            onClick={handleDislike}
+                            className="flex items-center gap-1 px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 cursor-pointer"
+                        >
+                            <AiTwotoneDislike />
+                            <span>{likeState.dislikes}</span>
                         </button>
                     </div>
                 </div>
             </div>
-            <div style={styles.commentSection}>
-                <h3>Comments</h3>
+
+            {/* Comments Section */}
+            <section className="mt-8">
+                <h3 className="text-xl font-semibold mb-4">Comments</h3>
+
                 {user && (
-                    <div style={styles.commentInputArea}>
+                    <div className="flex gap-3 mb-6">
                         <input
                             type="text"
                             placeholder="Add a comment..."
                             value={commentInput}
                             onChange={(e) => setCommentInput(e.target.value)}
-                            style={styles.commentInput}
+                            className="flex-grow border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                         />
-                        <button style={styles.addCommentBtn} onClick={handleAddComment}>
+                        <button
+                            onClick={handleAddComment}
+                            className="bg-red-600 text-white px-4 rounded hover:bg-red-700"
+                        >
                             Add
                         </button>
                     </div>
                 )}
-                <ul style={styles.commentList}>
+
+                <ul>
                     {comments.map((c) => (
-                        <li key={c.commentId} style={styles.commentItem}>
+                        <li
+                            key={c.commentId}
+                            className="mb-4 border-b border-gray-200 pb-2"
+                        >
                             <b>{c.userId}:</b>{" "}
                             {editingId === c.commentId ? (
                                 <>
                                     <input
                                         value={editText}
                                         onChange={(e) => setEditText(e.target.value)}
-                                        style={styles.commentInput}
+                                        className="border border-gray-300 rounded px-2 py-1 w-full max-w-md"
                                     />
-                                    <button style={styles.saveCommentBtn} onClick={handleSaveEdit}>Save</button>
-                                    <button style={styles.cancelEditBtn} onClick={() => setEditingId(null)}>Cancel</button>
+                                    <div className="mt-1 space-x-2">
+                                        <button
+                                            onClick={handleSaveEdit}
+                                            className="text-green-600 hover:underline"
+                                        >
+                                            Save
+                                        </button>
+                                        <button
+                                            onClick={() => setEditingId(null)}
+                                            className="text-gray-600 hover:underline"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
                                 </>
                             ) : (
                                 <>
                                     {c.text}{" "}
-                                    <span style={{ color: "#666", fontSize: 12 }}>
+                                    <span className="text-gray-400 text-sm">
                                         ({new Date(c.timestamp).toLocaleString()})
                                     </span>
                                     {user && c.userId === user.username && (
-                                        <>
+                                        <span className="ml-4 space-x-3">
                                             <button
-                                                style={styles.editCommentBtn}
                                                 onClick={() => handleEditComment(c.commentId, c.text)}
+                                                className="text-blue-600 hover:underline"
                                             >
                                                 Edit
                                             </button>
                                             <button
-                                                style={styles.deleteCommentBtn}
                                                 onClick={() => handleDeleteComment(c.commentId)}
+                                                className="text-red-600 hover:underline"
                                             >
                                                 Delete
                                             </button>
-                                        </>
+                                        </span>
                                     )}
                                 </>
                             )}
                         </li>
                     ))}
                 </ul>
-            </div>
+            </section>
         </div>
-    );
-};
 
-const styles = {
-    wrapper: { maxWidth: 900, margin: "40px auto", background: "#fff", borderRadius: 10, padding: 20, boxShadow: "0 2px 10px #eee" },
-    videoSection: { display: "flex", gap: 32 },
-    thumbnail: { width: 420, borderRadius: 10, border: "1px solid #eee" },
-    details: { flex: 1, paddingTop: 18 },
-    stats: { marginTop: 12, display: "flex", alignItems: "center", gap: 12 },
-    likeBtn: { border: "none", background: "#e3e3e3", borderRadius: 6, padding: "4px 10px", cursor: "pointer" },
-    dislikeBtn: { border: "none", background: "#e3e3e3", borderRadius: 6, padding: "4px 10px", cursor: "pointer" },
-    commentSection: { marginTop: 30 },
-    commentInputArea: { display: "flex", gap: 10, marginBottom: 8 },
-    commentInput: { flex: 1, padding: 6, border: "1px solid #ddd", borderRadius: 4 },
-    addCommentBtn: { padding: "6px 10px", border: "none", background: "#FF0000", color: "#fff", borderRadius: 4, cursor: "pointer" },
-    commentList: { listStyle: "none", padding: 0, marginBottom: 0, marginTop: 2 },
-    commentItem: { marginBottom: 12, fontSize: 16 },
-    editCommentBtn: { marginLeft: 10, color: "blue", background: "none", border: "none", cursor: "pointer" },
-    deleteCommentBtn: { marginLeft: 6, color: "red", background: "none", border: "none", cursor: "pointer" },
-    saveCommentBtn: { marginLeft: 6, color: "green", background: "none", border: "none", cursor: "pointer" },
-    cancelEditBtn: { marginLeft: 6, color: "#666", background: "none", border: "none", cursor: "pointer" },
+    );
 };
 
 export default VideoPlayerPage;

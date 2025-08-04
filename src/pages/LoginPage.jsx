@@ -36,97 +36,62 @@ const LoginPage = () => {
     };
 
     return (
-        <div style={styles.container}>
-            <h2>{isRegister ? "Register" : "Sign In"}</h2>
-            <form onSubmit={handleSubmit} style={styles.form}>
+        <div className="max-w-md mx-auto mt-20 bg-white p-8 rounded-lg shadow-md">
+            <h2 className="text-2xl font-bold mb-6 text-center">
+                {isRegister ? "Register" : "Sign In"}
+            </h2>
+            <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                 {isRegister && (
                     <input
                         type="text"
-                        placeholder="Username"
                         name="username"
+                        placeholder="Username"
                         value={form.username}
                         onChange={handleChange}
-                        style={styles.input}
+                        className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                        required
                     />
                 )}
                 <input
                     type="email"
-                    placeholder="Email"
                     name="email"
+                    placeholder="Email"
                     value={form.email}
                     onChange={handleChange}
-                    style={styles.input}
+                    className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    required
                 />
                 <input
                     type="password"
-                    placeholder="Password"
                     name="password"
+                    placeholder="Password"
                     value={form.password}
                     onChange={handleChange}
-                    style={styles.input}
+                    className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    required
                 />
-                {err && <div style={styles.err}>{err}</div>}
-                <button style={styles.btn} type="submit">
+                {err && <div className="text-red-600 text-sm">{err}</div>}
+                <button
+                    type="submit"
+                    className="bg-red-600 text-white rounded py-2 font-semibold hover:bg-red-700"
+                >
                     {isRegister ? "Register" : "Sign In"}
                 </button>
             </form>
             <button
-                style={styles.link}
                 onClick={() => {
-                    setIsRegister((prev) => !prev);
+                    setIsRegister(!isRegister);
                     setErr("");
                 }}
+                className="mt-4 text-red-600 hover:underline"
             >
-                {isRegister ? "Have an account? Sign In" : "No account? Register"}
+                {isRegister
+                    ? "Have an account? Sign In"
+                    : "No account? Register"}
             </button>
         </div>
-    );
-};
 
-const styles = {
-    container: {
-        maxWidth: 350,
-        margin: "60px auto",
-        background: "#fff",
-        borderRadius: 10,
-        boxShadow: "0 2px 10px #ddd",
-        padding: 24,
-        textAlign: "center",
-    },
-    form: {
-        display: "flex",
-        flexDirection: "column",
-        gap: 10,
-    },
-    input: {
-        padding: 10,
-        fontSize: 16,
-        borderRadius: 4,
-        border: "1px solid #ddd",
-    },
-    btn: {
-        marginTop: 8,
-        padding: "10px 0",
-        background: "#FF0000",
-        border: "none",
-        color: "#fff",
-        borderRadius: 6,
-        fontWeight: "bold",
-        cursor: "pointer",
-    },
-    link: {
-        marginTop: 12,
-        background: "none",
-        border: "none",
-        color: "#FF0000",
-        cursor: "pointer",
-        textDecoration: "underline",
-        fontSize: 15,
-    },
-    err: {
-        color: "red",
-        fontSize: 14,
-    },
+    );
 };
 
 export default LoginPage;

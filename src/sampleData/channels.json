@@ -8,7 +8,33 @@
         "subscribers": 5200,
         "videos": [
             "video01",
-            "video02"
+            "video02",
+            "video05"
+        ]
+    },
+    {
+        "channelId": "channel02",
+        "channelName": "Gaming Central",
+        "owner": "user02",
+        "description": "Funny and exciting gaming videos and live streams.",
+        "channelBanner": "https://dummyimage.com/900x180/222/fff&text=Gaming+Central",
+        "subscribers": 12500,
+        "videos": [
+            "video03",
+            "video06"
+        ]
+    },
+    {
+        "channelId": "channel03",
+        "channelName": "Music Vibes",
+        "owner": "user03",
+        "description": "The latest music videos and live performances.",
+        "channelBanner": "https://dummyimage.com/900x180/9b59b6/fff&text=Music+Vibes",
+        "subscribers": 8000,
+        "videos": [
+            "video04",
+            "video07",
+            "video08"
         ]
     }
 ]

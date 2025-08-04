@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { IoLogoYoutube } from "react-icons/io5";
+
 
 const Header = ({ onSearch }) => {
     const { user, logoutUser } = useContext(AuthContext);
@@ -13,83 +15,58 @@ const Header = ({ onSearch }) => {
     };
 
     return (
-        <header style={styles.header}>
+        <header className="flex items-center justify-between bg-red-600 text-white p-4 sticky top-0 z-50">
             <button
-                style={styles.menuBtn}
-                onClick={() => {
-                    window.dispatchEvent(new CustomEvent("toggleSidebar"));
-                }}
+                onClick={() => window.dispatchEvent(new CustomEvent('toggleSidebar'))}
+                className="text-3xl"
+                aria-label="Toggle Sidebar"
             >
                 &#9776;
             </button>
 
-            <Link to="/" style={styles.logo}>
-                YouTube Clone
+            <Link to="/" className="flex items-center font-bold text-xl md:text-2xl">
+                <IoLogoYoutube />YouTube Clone
             </Link>
 
-            <form onSubmit={handleSearch}>
+            <form onSubmit={handleSearch} className="flex flex-grow mx-4 max-w-xl">
                 <input
                     type="text"
                     placeholder="Search videos"
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    style={styles.searchInput}
+                    onChange={e => setSearchTerm(e.target.value)}
+                    className="flex-grow px-3 py-2 bg-white rounded-l-md text-black focus:outline-none"
                 />
+                <button
+                    type="submit"
+                    className="bg-gray-200 text-black px-4 rounded-r-md hover:bg-gray-300"
+                >
+                    Search
+                </button>
             </form>
 
             <div>
                 {!user ? (
-                    <button onClick={() => navigate("/login")} style={styles.signInBtn}>
+                    <button
+                        onClick={() => navigate('/login')}
+                        className="bg-white text-red-600 px-4 py-1 rounded-md font-semibold hover:bg-red-50"
+                    >
                         Sign In
                     </button>
                 ) : (
-                    <>
-                        <span style={{ marginRight: 10 }}>Welcome, {user.username}</span>
-                        <button onClick={logoutUser} style={styles.signInBtn}>
+                    <div className="flex items-center space-x-4">
+                        <span className="hidden sm:inline">Hello, {user.username}</span>
+                        <button
+                            onClick={logoutUser}
+                            className="bg-white text-red-600 px-3 py-1 rounded-md font-semibold hover:bg-red-50"
+                        >
                             Logout
                         </button>
-                    </>
+                    </div>
                 )}
             </div>
         </header>
-    );
-};
 
-const styles = {
-    header: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "10px 20px",
-        backgroundColor: "#FF0000",
-        color: "white",
-    },
-    menuBtn: {
-        fontSize: 24,
-        cursor: "pointer",
-        background: "none",
-        border: "none",
-        color: "white",
-    },
-    logo: {
-        fontWeight: "bold",
-        fontSize: 22,
-        textDecoration: "none",
-        color: "white",
-    },
-    searchInput: {
-        padding: 8,
-        borderRadius: 4,
-        border: "none",
-        width: 300,
-    },
-    signInBtn: {
-        background: "white",
-        border: "none",
-        padding: "6px 12px",
-        borderRadius: 4,
-        cursor: "pointer",
-    },
+    );
 };
 
 export default Header;

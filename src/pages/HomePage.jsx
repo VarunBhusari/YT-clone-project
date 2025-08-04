@@ -32,15 +32,20 @@ const HomePage = () => {
     }, [videos, selectedCategory, searchTerm]);
 
     return (
-        <div style={{ display: "flex" }}>
-            <Sidebar onSelectCategory={setSelectedCategory} />
-
-            <div style={{ marginLeft: 220, padding: 20, flexGrow: 1 }}>
-                <Header onSearch={setSearchTerm} />
-                <FilterBar selectedFilter={selectedCategory} onChangeFilter={setSelectedCategory} />
-                <VideoGrid videos={filteredVideos} />
+        <div>
+            <Header onSearch={setSearchTerm} />
+            <div className="flex pt-16 min-h-screen bg-gray-50">
+                <Sidebar onSelectCategory={setSelectedCategory} />
+                <main className="md:ml-6 flex-1 p-6">
+                    <FilterBar
+                        selectedFilter={selectedCategory}
+                        onChangeFilter={setSelectedCategory}
+                    />
+                    <VideoGrid videos={filteredVideos} />
+                </main>
             </div>
         </div>
+
     );
 };
 

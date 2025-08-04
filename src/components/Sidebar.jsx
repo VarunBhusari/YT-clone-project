@@ -21,48 +21,25 @@ const Sidebar = ({ onSelectCategory }) => {
     if (!isOpen) return null;
 
     return (
-        <aside style={styles.sidebar}>
-            <h3>Categories</h3>
-            <ul style={styles.list}>
+        <aside className="fixed top-16 left-0 h-[calc(100vh-64px)] w-56 bg-gray-100 shadow-lg overflow-auto p-4 z-40 md:relative md:top-0 md:h-auto md:w-54">
+            <h3 className="text-lg font-semibold mb-4">Categories</h3>
+            <ul>
                 {categories.map(cat => (
-                    <li key={cat} style={styles.listItem}>
-                        <button onClick={() => onSelectCategory(cat)} style={styles.btn}>
+                    <li key={cat} className="mb-2">
+                        <button
+                            onClick={() => onSelectCategory(cat)}
+                            className="w-full text-left px-3 py-2 rounded hover:bg-red-600 hover:text-white transition"
+                        >
                             {cat}
                         </button>
                     </li>
                 ))}
             </ul>
         </aside>
+
     );
 };
 
-const styles = {
-    sidebar: {
-        width: 200,
-        backgroundColor: "#f9f9f9",
-        padding: 20,
-        height: "calc(100vh - 60px)",
-        position: "fixed",
-        top: 60,
-        left: 0,
-        overflowY: "auto",
-        boxShadow: "2px 0 5px rgba(0,0,0,0.1)",
-    },
-    list: {
-        listStyle: "none",
-        padding: 0,
-    },
-    listItem: {
-        marginBottom: 10,
-    },
-    btn: {
-        background: "none",
-        border: "none",
-        color: "blue",
-        cursor: "pointer",
-        fontSize: 16,
-        padding: 0,
-    },
-};
+
 
 export default Sidebar;
