@@ -1,0 +1,32 @@
+[
+    {
+        "videoId": "video01",
+        "title": "Learn React in 30 Minutes",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dGcsHMXbSOA/maxresdefault.jpg",
+        "description": "A quick tutorial to get started with React.",
+        "channelName": "Code with John",
+        "channelId": "channel01",
+        "uploader": "user01",
+        "views": 15200,
+        "likes": 1023,
+        "dislikes": 45,
+        "uploadDate": "2024-09-20",
+        "category": "Education",
+        "comments": []
+    },
+    {
+        "videoId": "video02",
+        "title": "Intro to Node.js",
+        "thumbnailUrl": "https://i.ytimg.com/vi/TlB_eWDSMt4/maxresdefault.jpg",
+        "description": "Learn backend with Node.js",
+        "channelName": "Code with John",
+        "channelId": "channel01",
+        "uploader": "user01",
+        "views": 9800,
+        "likes": 800,
+        "dislikes": 32,
+        "uploadDate": "2024-09-25",
+        "category": "Technology",
+        "comments": []
+    }
+]
