@@ -1,0 +1,14 @@
+[
+    {
+        "channelId": "channel01",
+        "channelName": "Code with John",
+        "owner": "user01",
+        "description": "Coding tutorials and tech reviews by John Doe.",
+        "channelBanner": "https://dummyimage.com/900x180/f4f4f4/333&text=Code+with+John",
+        "subscribers": 5200,
+        "videos": [
+            "video01",
+            "video02"
+        ]
+    }
+]
