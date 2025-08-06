@@ -40,10 +40,6 @@ export const signup = async (req, res) => {
     }
 };
 
-
-
-// controllers/authController.js
-
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;

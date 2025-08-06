@@ -6,6 +6,4 @@ const axiosInstance = axios.create({
     baseURL: API_URL,
 });
 
-// Optionally add interceptors here to include JWT token automatically from localStorage or context
-
 export default axiosInstance;

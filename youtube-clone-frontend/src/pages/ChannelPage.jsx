@@ -30,59 +30,58 @@ const ChannelPage = () => {
         setVideoForm({ ...videoForm, [e.target.name]: e.target.value });
     };
 
-    // Add new video
-    const handleAddVideo = (e) => {
-        e.preventDefault();
-        const newVid = {
-            videoId: "video" + (Date.now()),
-            title: videoForm.title,
-            thumbnailUrl: videoForm.thumbnailUrl || "https://dummyimage.com/400x220/eee/333&text=Video",
-            description: videoForm.description,
-            channelName: channel.channelName,
-            channelId: channel.channelId,
-            uploader: channel.owner,
-            views: 0,
-            likes: 0,
-            dislikes: 0,
-            uploadDate: new Date().toISOString(),
-            comments: [],
-            category: "Education"
-        };
-        setVideos([newVid, ...videos]);
-        setVideoForm({ title: "", description: "", thumbnailUrl: "" });
-        // In real app: send POST to backend
-    };
+    // // Add new video
+    // const handleAddVideo = (e) => {
+    //     e.preventDefault();
+    //     const newVid = {
+    //         videoId: "video" + (Date.now()),
+    //         title: videoForm.title,
+    //         thumbnailUrl: videoForm.thumbnailUrl || "https://dummyimage.com/400x220/eee/333&text=Video",
+    //         description: videoForm.description,
+    //         channelName: channel.channelName,
+    //         channelId: channel.channelId,
+    //         uploader: channel.owner,
+    //         views: 0,
+    //         likes: 0,
+    //         dislikes: 0,
+    //         uploadDate: new Date().toISOString(),
+    //         comments: [],
+    //         category: "Education"
+    //     };
+    //     setVideos([newVid, ...videos]);
+    //     setVideoForm({ title: "", description: "", thumbnailUrl: "" });
+    // };
 
-    // Edit video
-    const handleEditVideo = (video) => {
-        setEditingVideo(video.videoId);
-        setVideoForm({
-            title: video.title,
-            description: video.description,
-            thumbnailUrl: video.thumbnailUrl
-        });
-    };
+    // // Edit video
+    // const handleEditVideo = (video) => {
+    //     setEditingVideo(video.videoId);
+    //     setVideoForm({
+    //         title: video.title,
+    //         description: video.description,
+    //         thumbnailUrl: video.thumbnailUrl
+    //     });
+    // };
 
-    // Save edited video
-    const handleSaveEdit = (e) => {
-        e.preventDefault();
-        setVideos(
-            videos.map((v) =>
-                v.videoId === editingVideo
-                    ? { ...v, ...videoForm }
-                    : v
-            )
-        );
-        setEditingVideo(null);
-        setVideoForm({ title: "", description: "", thumbnailUrl: "" });
-        // In real app: send PUT to backend
-    };
+    // // Save edited video
+    // const handleSaveEdit = (e) => {
+    //     e.preventDefault();
+    //     setVideos(
+    //         videos.map((v) =>
+    //             v.videoId === editingVideo
+    //                 ? { ...v, ...videoForm }
+    //                 : v
+    //         )
+    //     );
+    //     setEditingVideo(null);
+    //     setVideoForm({ title: "", description: "", thumbnailUrl: "" });
+    //     // In real app: send PUT to backend
+    // };
 
-    // Delete video
-    const handleDeleteVideo = (videoId) => {
-        setVideos(videos.filter((v) => v.videoId !== videoId));
-        // In real app: send DELETE to backend
-    };
+    // // Delete video
+    // const handleDeleteVideo = (videoId) => {
+    //     setVideos(videos.filter((v) => v.videoId !== videoId));
+    //     // In real app: send DELETE to backend
+    // };
 
     if (!channel) return <div style={{ margin: 30 }}><h2>Channel not found</h2><Link to="/">Back</Link></div>;
 

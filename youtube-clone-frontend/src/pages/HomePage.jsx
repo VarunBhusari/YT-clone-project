@@ -4,7 +4,6 @@ import Sidebar from "../components/Sidebar";
 import FilterBar from "../components/FilterBar";
 import VideoGrid from "../components/VideoGrid";
 import sampleVideos from "../sampleData/videos.json";
-import axios from "../api/axios";
 
 const HomePage = () => {
     const [videos, setVideos] = useState([]);
