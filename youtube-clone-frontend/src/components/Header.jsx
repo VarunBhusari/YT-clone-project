@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { IoLogoYoutube } from "react-icons/io5";
 
-
 const Header = ({ onSearch }) => {
     const { user, logoutUser } = useContext(AuthContext);
     const [searchTerm, setSearchTerm] = useState("");
@@ -17,7 +16,7 @@ const Header = ({ onSearch }) => {
     return (
         <header className="flex items-center justify-between bg-red-600 text-white p-4 sticky top-0 z-50">
             <button
-                onClick={() => window.dispatchEvent(new CustomEvent('toggleSidebar'))}
+                onClick={() => window.dispatchEvent(new CustomEvent("toggleSidebar"))}
                 className="text-3xl"
                 aria-label="Toggle Sidebar"
             >
@@ -25,7 +24,8 @@ const Header = ({ onSearch }) => {
             </button>
 
             <Link to="/" className="flex items-center font-bold text-xl md:text-2xl">
-                <IoLogoYoutube />YouTube Clone
+                <IoLogoYoutube />
+                YouTube Clone
             </Link>
 
             <form onSubmit={handleSearch} className="flex flex-grow mx-4 max-w-xl">
@@ -33,7 +33,7 @@ const Header = ({ onSearch }) => {
                     type="text"
                     placeholder="Search videos"
                     value={searchTerm}
-                    onChange={e => setSearchTerm(e.target.value)}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                     className="flex-grow px-3 py-2 bg-white rounded-l-md text-black focus:outline-none"
                 />
                 <button
@@ -47,14 +47,21 @@ const Header = ({ onSearch }) => {
             <div>
                 {!user ? (
                     <button
-                        onClick={() => navigate('/login')}
+                        onClick={() => navigate("/login")}
                         className="bg-white text-red-600 px-4 py-1 rounded-md font-semibold hover:bg-red-50"
                     >
                         Sign In
                     </button>
                 ) : (
                     <div className="flex items-center space-x-4">
-                        <span className="hidden sm:inline">Hello, {user.username}</span>
+                        {/* Make username clickable to navigate to /profile */}
+                        <Link
+                            to="/profile"
+                            className="hidden sm:inline cursor-pointer underline hover:text-gray-200"
+                            aria-label="User Profile"
+                        >
+                            Hello, {user.username}
+                        </Link>
                         <button
                             onClick={logoutUser}
                             className="bg-white text-red-600 px-3 py-1 rounded-md font-semibold hover:bg-red-50"
@@ -65,7 +72,6 @@ const Header = ({ onSearch }) => {
                 )}
             </div>
         </header>
-
     );
 };
 
