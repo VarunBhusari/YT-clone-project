@@ -1,6 +1,8 @@
 YouTube Clone MERN Project
 A full-stack YouTube Clone application built with the MERN stack (MongoDB, Express, React, Node.js), featuring user authentication, channels, videos, comments, and more.
 
+https://github.com/VarunBhusari/YT-clone-project
+
 Features
 User Authentication with JWT tokens (signup, login, logout)
 
